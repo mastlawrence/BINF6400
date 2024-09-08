@@ -3,7 +3,9 @@
 ## Write a python program to take two sequences as input and find the longest common 
 ## subsequences between these two strings
 
-## TODO: Possible idea is to think about this in terms of k-mers
+## TODO: Possible idea is to think about this in terms of k-mers. Build lists for both
+##       and find the largest k-mer which matches between the two sequences. Build both
+##       and compare performance.
 
 ## one way is to model this pattern of scanning:
 
@@ -27,7 +29,11 @@ def main():
     seq1 = list("ATGCATC")
     seq2 = list("ATGTGCATT")
 
+    ## Step 1: Determine the long and short sequence
     long_seq, short_seq = determine_length(seq1, seq2)
+
+    ## Step 2: Compare each sequence and return an index
+    compare_lists(short_seq, long_seq)
 
 
 
@@ -57,6 +63,20 @@ def determine_length(seq1, seq2):
         short_seq = seq1
 
     return (long_seq, short_seq)
+
+
+def compare_lists(list1, list2):
+    """
+    compares both lists. Returns a list of the index where
+    both lists match and where they did not.
+    """
+    match_index = list()
+    list2 = list2[0:len(list1)]
+    
+    print("list1", list1)
+    print("list2", list2)
+
+
 
 
 if __name__ == "__main__":
