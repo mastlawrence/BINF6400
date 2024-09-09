@@ -92,9 +92,7 @@ def select_longest_subsequence(shared_kmers):
     selects the longest shared kmer from the 
     generated list.
     """
-    longest_subsequence = max(sorted(shared_kmers, key = len))
-
-    return longest_subsequence
+    return  max(sorted(shared_kmers, key = len))
 
 
 
