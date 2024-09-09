@@ -18,16 +18,12 @@ def main():
     long_seq, short_seq = determine_length(seq1, seq2)
     print("long_seq:", long_seq, "short_seq:", short_seq)
 
-
     ## Step 2: Generate list of k-mers for each sequence
     seq1_list = list_kmers(seq1)
     seq2_list = list_kmers(seq2)
-    print("seq1 kmers:", seq1_list)
-    print("seq2 kmers:", seq2_list)
 
     ## Step 3: Generate list of set intersections between two kmer lists
     common_elements = generate_intersection(seq1_list, seq2_list)
-    print(common_elements)
 
     ## Step 4: Select the longest shared subsequence
     longest_subsequence = select_longest_subsequence(common_elements)
