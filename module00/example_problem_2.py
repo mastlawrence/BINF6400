@@ -1,11 +1,21 @@
-## Take two sequences as inputs and find the longest common subsequence between the two strings
+"""
+Week 1 optional python programming warm-up
 
-## Approach problem by calculating k-mers, and finding the longest identical k-mer shared between 
-## the two strings
+Finds the longest shared subsequence between
+two sequences of DNA by breaking each DNA
+sequence into k-mers, and finding the longest
+shared k-mer between the two sequences.
 
-## sequence 1: A T G C A T C
-## sequence 2: A T G T G C A T T
+example case:
+    Seq1: ATGCATC
+    Seq2: ATGTGCATT
 
+will return the longest common subsequence 
+'TGCAT'
+
+Name: Matthew St. Lawrence
+Date: 10 Sep 2024
+"""
 import sys 
 
 def main():
@@ -27,7 +37,6 @@ def main():
 
     ## Step 4: Select the longest shared subsequence
     longest_subsequence = select_longest_subsequence(common_elements)
-    print(longest_subsequence)
 
     ## Step 5: Output results
     print("the longest shared subsequence is:", longest_subsequence)
@@ -70,6 +79,7 @@ def generate_intersection(seq1, seq2):
     Generate list of set intersections to store 
     shared kmers between the two sequences 
     """
+    ## Use set intersection to find shared k-mers
     set1, set2 = set(seq1), set(seq2)
     common_elements = set1.intersection(set2)
 
@@ -87,7 +97,6 @@ def select_longest_subsequence(shared_kmers):
     except ValueError:
         print("no sequence data submitted! Please submit sequence data.")
         sys.exit()
-
 
 
 if __name__ == "__main__":
