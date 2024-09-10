@@ -6,6 +6,7 @@
 ## sequence 1: A T G C A T C
 ## sequence 2: A T G T G C A T T
 
+import sys 
 
 def main():
     """
@@ -26,6 +27,7 @@ def main():
 
     ## Step 4: Select the longest shared subsequence
     longest_subsequence = select_longest_subsequence(common_elements)
+    print(longest_subsequence)
 
     ## Step 5: Output results
     print("the longest shared subsequence is:", longest_subsequence)
@@ -39,7 +41,6 @@ def accept_user_input():
     seq2 = input("input sequence 2:")
 
     return seq1, seq2
-
 
 
 def list_kmers(seq):
@@ -80,9 +81,15 @@ def select_longest_subsequence(shared_kmers):
     selects the longest shared kmer from the 
     generated list.
     """
-    return  max(sorted(shared_kmers, key = len))
+    try:
+        return  max(sorted(shared_kmers, key = len), key = len)
+
+    except ValueError:
+        print("no sequence data submitted! Please submit sequence data.")
+        sys.exit()
 
 
 
 if __name__ == "__main__":
     main()
+
