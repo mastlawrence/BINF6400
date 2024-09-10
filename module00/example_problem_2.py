@@ -14,9 +14,8 @@ def main():
     seq1 = "ATGCATC"
     seq2 = "ATGTGCATT"
 
-    ## Step 1: Determine which sequence is shorter
-    long_seq, short_seq = determine_length(seq1, seq2)
-    print("long_seq:", long_seq, "short_seq:", short_seq)
+    ## Step 1: Accept user input
+    seq1, seq2 = accept_user_input()
 
     ## Step 2: Generate list of k-mers for each sequence
     seq1_list = list_kmers(seq1)
@@ -32,24 +31,14 @@ def main():
     print("the longest shared subsequence is:", longest_subsequence)
 
 
-def determine_length(seq1, seq2):
+def accept_user_input():
     """
-    Determines which sequence is the 'short' sequence and 
-    which is the 'long' sequence
+    accepts user input of two sequences
     """
+    seq1 = input("input sequence 1:")
+    seq2 = input("input sequence 2:")
 
-    length_seq1 = len(seq1)
-    length_seq2 = len(seq2)
-
-    if length_seq1 > length_seq2:
-        long_seq = seq1
-        short_seq = seq2
-
-    else:
-        long_seq = seq2
-        short_seq = seq1
-
-    return (long_seq, short_seq)
+    return seq1, seq2
 
 
 
@@ -67,8 +56,7 @@ def list_kmers(seq):
             subseq = seq[i:i+kmer]
             kmer_list.append(subseq)
 
-    ## filter for unique values and sort
-    ## TODO: May not have to do this since sets are mutable
+    ## filter for unique kmers and sort
     kmer_list = set(kmer_list)
     kmer_list = list(kmer_list)
     kmer_list = sorted(kmer_list, key=len)
