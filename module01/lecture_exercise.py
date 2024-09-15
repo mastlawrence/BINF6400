@@ -83,12 +83,27 @@ def merge_and_remove():
     print(seq1_list[:merge_parameter])
     print(seq2_list[-merge_parameter:])
 
+    match_f_seq1 = seq1_list[:merge_parameter]
+    match_f_seq2 = seq2_list[-merge_parameter:]
+
+    if match_f_seq1 == match_f_seq2:
+        print("")
+        print("match detected")
+
     print("\n")
 
-    print("matching +", merge_parameter, "of", seq1, "with -", merge_parameter, "of", seq2)
+    print("matching -", merge_parameter, "of", seq1, "with +", merge_parameter, "of", seq2)
     print("-----------------------------------------------------------------------------")
-    print(seq1_list[:merge_parameter])
-    print(seq2_list[-merge_parameter:])
+    print(seq1_list[-merge_parameter:])
+    print(seq2_list[:merge_parameter])
+
+    match_b_seq1 = seq1_list[-merge_parameter:]
+    match_b_seq2 = seq2_list[:merge_parameter]
+
+    if match_b_seq1 == match_b_seq2:
+        print("")
+        print("match detected")
+        print("\n")
 
 
 
