@@ -17,11 +17,6 @@ import os
 os.system('color')
 random.seed(42)
 
-
-
-GREEN = '\033[32M'
-
-
 def main():
 
     ## Step 1: generate sample data
@@ -31,7 +26,7 @@ def main():
 
     print(seq1, seq2)
 
-    ##TODO: test a longer sequence
+    ## Testing a longer sequence
     seq1 = "AAGCC"
     seq2 = "CCAAA"
 
@@ -78,9 +73,11 @@ def detect_match(seq1, seq2, merge_parameter):
 
     seq1_list = list(seq1)
     seq2_list = list(seq2)
-    
+
+
+
+    ## Format output
     print("\n")
-    
     print("matching +", merge_parameter, "of", seq1, "with -", merge_parameter, "of", seq2)
     print("-----------------------------------------------------------------------------")
     print(seq1_list[:merge_parameter])
@@ -97,7 +94,7 @@ def detect_match(seq1, seq2, merge_parameter):
         combined_seq = "".join(combined_seq)
 
         print("Contig:", combined_seq)
-        sys.exit("contig found")
+        return combined_seq
 
     print("\n")
 
@@ -112,12 +109,12 @@ def detect_match(seq1, seq2, merge_parameter):
     if match_b_seq1 == match_b_seq2:
         print("")
         print("match detected")
-        print("\n")
 
-        combined_seq = seq2_list[:merge_parameter] + seq1_list
+        combined_seq = seq1_list[:-merge_parameter] + seq2_list
         combined_seq = "".join(combined_seq)
 
-#        print("Contig:", combined_seq)
+        print("Contig:", combined_seq)
+        return combined_seq
 
 
 
