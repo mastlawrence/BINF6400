@@ -12,23 +12,30 @@ what does this tell you about the uniqueness of any sub-sequence length n
 """
 import sys
 import random
+import os
 
+os.system('color')
 random.seed(42)
+
+
+
+GREEN = '\033[32M'
 
 
 def main():
 
     ## Step 1: generate sample data
-    data_set = generate_set(3)
+    data_set = generate_set(2, 4)
+    seq1 = data_set[0]
+    seq2 = data_set[1]
 
-    ## Step 2: By a greedy method, assemble the sequences
-    assemble_reads(data_set)
+    print(seq1, seq2)
 
-    ## TODO: Test function to figure out how to merge and remove elements of a list
-    merge_and_remove()
+    ## Step 2: Look for overlap between the two sequences
+    for i in range(len(seq1), 0, -1):
+        detect_match(seq1, seq2, i)
 
-
-def generate_set(n):
+def generate_set(n, l):
     """
     generates a set of 10 different 
     20-length reads
@@ -36,7 +43,7 @@ def generate_set(n):
     sequence_set = []
 
     for i in range(0,n):
-        sequence = _generate_sequence(4)
+        sequence = _generate_sequence(l)
         sequence_set.append(sequence)
 
     return sequence_set
@@ -56,27 +63,18 @@ def _generate_sequence(l):
     return "".join(seq_data)
 
 
-def assemble_reads(seq_data):
-    """
-    looks for matching reads
-    """
-    for i in range(0, len(seq_data)):
-        print(seq_data[i])
-
-
-def merge_and_remove():
+def detect_match(seq1, seq2, merge_parameter):
     """
     test function for figuring out 
     how to merge and remove elements 
     from a list based on a match 
     parameter.
     """
-    merge_parameter = int(input("merge parameters:"))
-    seq1 = "AAGC"
-    seq2 = "CCAA"
 
     seq1_list = list(seq1)
     seq2_list = list(seq2)
+    
+    print("\n")
     
     print("matching +", merge_parameter, "of", seq1, "with -", merge_parameter, "of", seq2)
     print("-----------------------------------------------------------------------------")
@@ -90,6 +88,12 @@ def merge_and_remove():
         print("")
         print("match detected")
 
+        combined_seq = seq2_list[:merge_parameter] + seq1_list
+        combined_seq = "".join(combined_seq)
+
+        print("Contig:", combined_seq)
+        sys.exit("Contig found")
+
     print("\n")
 
     print("matching -", merge_parameter, "of", seq1, "with +", merge_parameter, "of", seq2)
@@ -102,14 +106,8 @@ def merge_and_remove():
 
     if match_b_seq1 == match_b_seq2:
         print("")
-        print("match detected")
+        print(GREEN + "match detected")
         print("\n")
-
-
-
-
-
-
 
 
 
