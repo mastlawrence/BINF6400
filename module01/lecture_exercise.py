@@ -31,9 +31,14 @@ def main():
 
     print(seq1, seq2)
 
+    ##TODO: test a longer sequence
+    seq1 = "AAGCC"
+    seq2 = "CCAAA"
+
     ## Step 2: Look for overlap between the two sequences
     for i in range(len(seq1), 0, -1):
         detect_match(seq1, seq2, i)
+
 
 def generate_set(n, l):
     """
@@ -88,11 +93,11 @@ def detect_match(seq1, seq2, merge_parameter):
         print("")
         print("match detected")
 
-        combined_seq = seq2_list[:merge_parameter] + seq1_list
+        combined_seq = seq2_list[:-merge_parameter] + seq1_list
         combined_seq = "".join(combined_seq)
 
         print("Contig:", combined_seq)
-        sys.exit("Contig found")
+        sys.exit("contig found")
 
     print("\n")
 
@@ -106,8 +111,13 @@ def detect_match(seq1, seq2, merge_parameter):
 
     if match_b_seq1 == match_b_seq2:
         print("")
-        print(GREEN + "match detected")
+        print("match detected")
         print("\n")
+
+        combined_seq = seq2_list[:merge_parameter] + seq1_list
+        combined_seq = "".join(combined_seq)
+
+#        print("Contig:", combined_seq)
 
 
 
