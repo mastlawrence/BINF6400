@@ -14,17 +14,17 @@ import sys
 import random
 import os
 
-random.seed(42)
+random.seed(100)
 
 def main():
 
     ## Step 1: generate sample data
     data_set = generate_set(3, 4)
-    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC']
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT"]
 
     ## Step 2: Look for overlap between the two sequence
     contig_set = find_contigs(data_set, 2)
-    print(contig_set)
+
 
 
 
@@ -61,17 +61,26 @@ def find_contigs(data_set, merge_parameter):
     assembles contigs within the sequence data
     stored within the list
     """
+    contigs = []
     i = 1
     while i < len(data_set):
         combined_seq = _detect_match(data_set[0], data_set[i], merge_parameter)
-        
-        if type(combined_seq) == str:
-            data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
-            data_set.insert(0, combined_seq)
-            i = 1
+
+        if combined_seq is None:
+            combined_seq = False
+
+        print(combined_seq)
+
+
+        if combined_seq == False:
+            if i == len(data_set) - 1:
+                print("bottom found!")
+            i = i + 1
 
         else:
-            i = i + 1
+            data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
+            data_set.insert(0, combined_seq)
+
 
     return data_set
 
@@ -109,7 +118,6 @@ def _detect_match(seq1, seq2, merge_parameter):
         combined_seq = "".join(combined_seq)
 
         return combined_seq
-
 
 if __name__ == "__main__":
     main()
