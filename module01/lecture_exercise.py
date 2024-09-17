@@ -14,25 +14,40 @@ import sys
 import random
 import os
 
-os.system('color')
 random.seed(42)
 
 def main():
 
     ## Step 1: generate sample data
-    data_set = generate_set(2, 4)
-    seq1 = data_set[0]
-    seq2 = data_set[1]
+    data_set = generate_set(3, 4)
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC']
 
-    print(seq1, seq2)
+    ## Step 2: Look for overlap between the two sequence
+    combined_seq = detect_match_wo_output(data_set[0], data_set[1], 2)
+    print(combined_seq)
 
-    ## Testing a longer sequence
-    seq1 = "AAGCC"
-    seq2 = "CCAAA"
+    ## apply list comprehension. This is NASTY.
+    data_set = [x for x in data_set if x not in [data_set[0],data_set[1]]]
+    data_set.insert(0, combined_seq)
+    print(data_set)
 
-    ## Step 2: Look for overlap between the two sequences
-    for i in range(len(seq1), 0, -1):
-        detect_match(seq1, seq2, i)
+    print("------------------------------------------------------------")
+
+    ## Wrap step two into a big loop
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC']
+    i = 1
+
+    while i < len(data_set):
+        combined_seq = detect_match_wo_output(data_set[0], data_set[i], 2)
+        
+        if type(combined_seq) == str:
+            data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
+            data_set.insert(0, combined_seq)
+            print(data_set)
+            i = 1
+
+        else:
+            i = i + 1
 
 
 def generate_set(n, l):
@@ -63,7 +78,7 @@ def _generate_sequence(l):
     return "".join(seq_data)
 
 
-def detect_match(seq1, seq2, merge_parameter):
+def detect_match_wo_output(seq1, seq2, merge_parameter):
     """
     test function for figuring out 
     how to merge and remove elements 
@@ -75,14 +90,6 @@ def detect_match(seq1, seq2, merge_parameter):
     seq2_list = list(seq2)
 
 
-
-    ## Format output
-    print("\n")
-    print("matching +", merge_parameter, "of", seq1, "with -", merge_parameter, "of", seq2)
-    print("-----------------------------------------------------------------------------")
-    print(seq1_list[:merge_parameter])
-    print(seq2_list[-merge_parameter:])
-
     match_f_seq1 = seq1_list[:merge_parameter]
     match_f_seq2 = seq2_list[-merge_parameter:]
 
@@ -92,16 +99,9 @@ def detect_match(seq1, seq2, merge_parameter):
 
         combined_seq = seq2_list[:-merge_parameter] + seq1_list
         combined_seq = "".join(combined_seq)
-
-        print("Contig:", combined_seq)
+ 
         return combined_seq
 
-    print("\n")
-
-    print("matching -", merge_parameter, "of", seq1, "with +", merge_parameter, "of", seq2)
-    print("-----------------------------------------------------------------------------")
-    print(seq1_list[-merge_parameter:])
-    print(seq2_list[:merge_parameter])
 
     match_b_seq1 = seq1_list[-merge_parameter:]
     match_b_seq2 = seq2_list[:merge_parameter]
@@ -113,9 +113,7 @@ def detect_match(seq1, seq2, merge_parameter):
         combined_seq = seq1_list[:-merge_parameter] + seq2_list
         combined_seq = "".join(combined_seq)
 
-        print("Contig:", combined_seq)
         return combined_seq
-
 
 
 if __name__ == "__main__":
