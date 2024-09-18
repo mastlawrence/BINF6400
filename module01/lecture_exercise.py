@@ -71,16 +71,23 @@ def find_contigs(data_set, merge_parameter):
 
         print(combined_seq)
 
-
         if combined_seq == False:
             if i == len(data_set) - 1:
                 print("bottom found!")
+                contigs.append(data_set[0])
+                data_set.remove(data_set[0])
+                
+                i = 0
+
             i = i + 1
+
 
         else:
             data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
             data_set.insert(0, combined_seq)
-
+    
+    print("contigs:", contigs)
+    print("data set:", data_set)
 
     return data_set
 
