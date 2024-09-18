@@ -10,6 +10,10 @@ what does this tell you about the uniqueness of any sub-sequence length n
 (where n = 0, 1, 2 ... k ... length).
 
 """
+## TODO: Set up some unit testing for the assembly functions
+## TODO: Learn the data analysis portion and implement that
+## TODO: Figure out how to export the contig list to a FASTA file
+
 import sys
 import random
 import os
@@ -19,11 +23,20 @@ random.seed(100)
 def main():
 
     ## Step 1: generate sample data
-    data_set = generate_set(3, 4)
-    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT", "TGGGGGG", "CTTCTAG"]
+
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT", "TGGGGCCGG", "CTTCTAG"]
+    data_set = generate_set(5, 5)
+    print(data_set)
 
     ## Step 2: Look for overlap between the two sequence
     contig_set = find_contigs(data_set, 2)
+
+    print("=======================================")
+    print("Contigs:", contig_set)
+    print("Contig Count:", len(contig_set))
+    
+
+    ## Step 3: Convert list of contigs into a FASTA file
 
 
 
@@ -32,6 +45,8 @@ def generate_set(n, l):
     """
     generates a set of 10 different 
     20-length reads
+    n: how many sequences to generate
+    l: how long each sequence is
     """
     sequence_set = []
 
@@ -91,7 +106,7 @@ def find_contigs(data_set, merge_parameter):
     print("contigs:", contigs)
     print("data set:", data_set)
 
-    return data_set
+    return contigs
 
 
 
