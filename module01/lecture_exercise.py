@@ -20,7 +20,7 @@ def main():
 
     ## Step 1: generate sample data
     data_set = generate_set(3, 4)
-    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT"]
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT", "TGGGGGG", "CTTCTAG"]
 
     ## Step 2: Look for overlap between the two sequence
     contig_set = find_contigs(data_set, 2)
@@ -85,7 +85,9 @@ def find_contigs(data_set, merge_parameter):
         else:
             data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
             data_set.insert(0, combined_seq)
-    
+   
+
+    contigs.append(data_set[0])
     print("contigs:", contigs)
     print("data set:", data_set)
 
