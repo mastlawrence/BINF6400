@@ -27,7 +27,6 @@ def main():
     data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT", "TGGGGCCGG", "CTTCTAG"]
     data_set = generate_set(5, 5)
     data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', 'GGGGGGGGG', 'CCTATTTATACC']
-    print(data_set)
 
     ## Step 2: Look for overlap between the two sequence
     contig_set = find_contigs(data_set, 2)
@@ -80,19 +79,18 @@ def find_contigs(data_set, merge_parameter):
     contigs = []
     i = 1
     while i < len(data_set):
-        print(i)
+        print(data_set)
 
         ## From this statement, we get back either a yes or a no
+        print("data_set[0]:", data_set[0], "data_set[", i, ']:', data_set[i])
+        print('\n')
         combined_seq = _detect_match(data_set[0], data_set[i], merge_parameter)
 
         if combined_seq is None:
             combined_seq = False
 
-        print(combined_seq)
-
         if combined_seq == False: 
             if i == len(data_set) - 1:
-                print("i",i,  "bottom found!")
                 contigs.append(data_set[0])
                 data_set.remove(data_set[0])
                 i = 0
@@ -103,14 +101,10 @@ def find_contigs(data_set, merge_parameter):
         else:
             data_set = [x for x in data_set if x not in [data_set[0], data_set[i]]]
             data_set.insert(0, combined_seq)
-            print("-------------------------")
-            print("matching sequence removed!")
-            print(data_set)
-            print("-------------------------")
+            i = 1
+
 
     contigs.append(data_set[0])
-    print("contigs:", contigs)
-    print("data set:", data_set)
 
     return contigs
 
