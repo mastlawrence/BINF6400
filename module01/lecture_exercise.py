@@ -26,9 +26,10 @@ def main():
 
     data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', "GGGGT", "TGGGGCCGG", "CTTCTAG"]
     data_set = generate_set(5, 5)
-    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', 'GGGGGGGGG', 'CCTATTTATACC']
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', 'GGGGGGGGG', 'CCTATTTATACC', 'GGGGGGGGGGGGGGGGGGGGG']
+    data_set = ['AAGCC', 'CCAAA','GGGGG', 'TAAACC', 'GGGGGGGGG', 'CCTATTTATACC', 'TTAVVATTAVVATT', 'TTAVVAATABBBSTT']
 
-    ## Step 2: Look for overlap between the two sequence
+## Step 2: Look for overlap between the two sequence
     contig_set = find_contigs(data_set, 2)
 
     print("=======================================")
